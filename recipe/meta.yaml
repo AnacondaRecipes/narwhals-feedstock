@@ -21,6 +21,12 @@ requirements:
     - pip
   run:
     - python
+  run_constrained:
+    - pandas >=0.25.3
+    - polars >=0.20.3
+    - pyarrow >=11.0.0
+    - pyspark >=3.5.0
+    - dask >=2024.8
 
 test:
   imports:
@@ -29,7 +35,6 @@ test:
     - pip check
   requires:
     - pip
-    - python
 
 about:
   home: https://github.com/narwhals-dev/narwhals
