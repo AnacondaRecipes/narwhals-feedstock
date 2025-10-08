@@ -23,8 +23,6 @@ requirements:
     - python
 
 test:
-  source_files:
-    - tests
   imports:
     - narwhals
     - narwhals._arrow
