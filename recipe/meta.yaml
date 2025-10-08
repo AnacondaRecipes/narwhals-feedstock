@@ -1,18 +1,18 @@
 {% set name = "narwhals" %}
-{% set version = "1.31.0" %}
+{% set version = "1.48.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/narwhals-{{ version }}.tar.gz
-  sha256: 333472e2562343dfdd27407ec9b5114a07c81d0416794e4ac6b703dd925c6a1a
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: b375cfdfc20b84b5ac0926f34c5c1373eb23ebea48d47bf75e282161cda63e34
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
-  skip: True  #[py<38]
+  number: 0
+  skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
@@ -21,20 +21,60 @@ requirements:
     - pip
   run:
     - python
-  run_constrained:
-    - pandas >=0.25.3
-    - polars >=0.20.3
-    - pyarrow >=11.0.0
-    - pyspark >=3.5.0
-    - dask >=2024.8
 
 test:
+  source_files:
+    - tests
   imports:
     - narwhals
-  commands:
-    - pip check
+    - narwhals._arrow
+    - narwhals._compliant
+    - narwhals._constants
+    - narwhals._dask
+    - narwhals._duckdb
+    - narwhals._duration
+    - narwhals._enum
+    - narwhals._expression_parsing
+    - narwhals._ibis
+    - narwhals._interchange
+    - narwhals._namespace
+    - narwhals._pandas_like
+    - narwhals._polars
+    - narwhals._spark_like
+    - narwhals._sql
+    - narwhals._translate
+    - narwhals._typing_compat
+    - narwhals._utils
+    - narwhals.dataframe
+    - narwhals.dependencies
+    - narwhals.dtypes
+    - narwhals.exceptions
+    - narwhals.expr
+    - narwhals.expr_cat
+    - narwhals.expr_dt
+    - narwhals.expr_list
+    - narwhals.expr_name
+    - narwhals.expr_str
+    - narwhals.expr_struct
+    - narwhals.functions
+    - narwhals.group_by
+    - narwhals.schema
+    - narwhals.selectors
+    - narwhals.series
+    - narwhals.series_cat
+    - narwhals.series_dt
+    - narwhals.series_list
+    - narwhals.series_str
+    - narwhals.series_struct
+    - narwhals.stable
+    - narwhals.translate
+    - narwhals.typing
+    - narwhals.utils
   requires:
     - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
   home: https://github.com/narwhals-dev/narwhals
@@ -47,7 +87,7 @@ about:
     Narwhals is an extremely lightweight compatibility layer between pandas, Polars, cuDF, and Modin.
     It allows you to write code that works with all of these libraries without having to worry about
     the differences between them.
-  doc_url: https://narwhals-dev.github.io/narwhals/
+  doc_url: https://narwhals-dev.github.io/narwhals
 
 
 extra:
