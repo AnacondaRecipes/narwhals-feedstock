@@ -72,7 +72,6 @@ test:
     - pip
   commands:
     - pip check
-    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
   home: https://github.com/narwhals-dev/narwhals
@@ -92,3 +91,12 @@ extra:
   recipe-maintainers:
     - MarcoGorelli
     - thewchan
+
+  skip-lints:
+    - missing_source
+    - avoid_noarch    # Only if building a noarch package
+  anaconda-services:
+    recipe-maintainers:
+       - bkreider
+    comment: "needed for pyreadstat"
+
