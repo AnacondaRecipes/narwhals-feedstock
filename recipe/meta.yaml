@@ -1,5 +1,5 @@
 {% set name = "narwhals" %}
-{% set version = "2.7.0" %}
+{% set version = "2.22.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e3fff7f1610fd3318ede78c969bc5954ce710d585eefdb689586fb69da3da43c
+  sha256: d62920805a0a43b7ff8b54b0c0d3142d796f8a9301836ada37e573d6a33cbcd9
 
 build:
   number: 0
@@ -86,7 +86,6 @@ about:
     It allows you to write code that works with all of these libraries without having to worry about
     the differences between them.
   doc_url: https://narwhals-dev.github.io/narwhals
-
 
 extra:
   recipe-maintainers:
