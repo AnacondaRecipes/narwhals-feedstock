@@ -1,5 +1,5 @@
 {% set name = "narwhals" %}
-{% set version = "2.7.0" %}
+{% set version = "2.23.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,18 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e3fff7f1610fd3318ede78c969bc5954ce710d585eefdb689586fb69da3da43c
+  sha256: 13e7ff5b4bb4a2f77b907c2e4d8a76e273dfc1323a3c997440a2f9fd26aed408
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
-    - hatchling
     - pip
+    - uv-build >=0.11.0,<0.12.0
   run:
     - python
 
@@ -86,7 +86,6 @@ about:
     It allows you to write code that works with all of these libraries without having to worry about
     the differences between them.
   doc_url: https://narwhals-dev.github.io/narwhals
-
 
 extra:
   recipe-maintainers:
